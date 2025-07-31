@@ -73,7 +73,7 @@ export default function DistanceInput({
                 type="number"
                 value={distance}
                 onChange={(e) => onDistanceChange(e.target.value)}
-                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300 dark:focus:border-blue-500 transition-colors duration-300"
                 min="0"
             />
             {error && <p className="text-red-600 text-sm mt-1">{error}</p>}

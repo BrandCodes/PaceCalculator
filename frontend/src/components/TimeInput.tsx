@@ -25,7 +25,7 @@ export default function TimeInput({
                     type="number"
                     value={hours}
                     onChange={(e) => onHoursChange(e.target.value)}
-                    className="w-full px-3 py-2 border rounded-lg"
+                    className="w-full px-3 py-2 border rounded-lg dark:focus:border-blue-500 transition-colors duration-300"
                     min="0"
                 />
             </div>
@@ -35,7 +35,7 @@ export default function TimeInput({
                     type="number"
                     value={minutes}
                     onChange={(e) => onMinutesChange(e.target.value)}
-                    className="w-full px-3 py-2 border rounded-lg"
+                    className="w-full px-3 py-2 border rounded-lg dark:focus:border-blue-500 transition-colors duration-300"
                     min="0"
                 />
             </div>
@@ -45,7 +45,7 @@ export default function TimeInput({
                     type="number"
                     value={seconds}
                     onChange={(e) => onSecondsChange(e.target.value)}
-                    className="w-full px-3 py-2 border rounded-lg"
+                    className="w-full px-3 py-2 border rounded-lg dark:focus:border-blue-500 transition-colors duration-300"
                     min="0"
                     max="59"
                 />
