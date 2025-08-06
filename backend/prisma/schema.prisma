@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ConfiguracionUsuario {
+  IdConfiguracionUsuario String  @id @db.Uuid
+  IdUsuario              String  @db.Uuid
+  DarkMode               Boolean
+  Usuario                Usuario @relation(fields: [IdUsuario], references: [IdUsuario], onDelete: NoAction, onUpdate: NoAction, map: "configuracionusuario_idusuario_foreign")
+}
+
+model Genero {
+  IdGenero          Int      @id
+  DescripcionGenero String   @db.VarChar(128)
+  Estatus           Boolean
+  Perfil            Perfil[]
+}
+
+model Perfil {
+  IdPerfil              String   @id @db.Uuid
+  IdUsuario             String   @db.Uuid
+  IdGenero              Int
+  FechaNacimiento       DateTime @db.Date
+  Edad                  Int
+  Deporte               String   @db.VarChar(255)
+  Enfermedad            Boolean
+  DescripcionEnfermedad String   @db.VarChar(500)
+  Genero                Genero   @relation(fields: [IdGenero], references: [IdGenero], onDelete: NoAction, onUpdate: NoAction, map: "perfil_idgenero_foreign")
+  Usuario               Usuario  @relation(fields: [IdUsuario], references: [IdUsuario], onDelete: NoAction, onUpdate: NoAction, map: "perfil_idusuario_foreign")
+}
+
+model Prediccion {
+  IdPrediccion             String  @id @db.Uuid
+  IdUsuario                String  @db.Uuid
+  BasePace                 Float
+  TiempoPrediccion5K       Float
+  TiempoPrediccion10K      Float
+  TiempoPrediccion21K      Float
+  TiempoPrediccionMarathon Float
+  Usuario                  Usuario @relation(fields: [IdUsuario], references: [IdUsuario], onDelete: NoAction, onUpdate: NoAction, map: "prediccion_idusuario_foreign")
+}
+
+model Usuario {
+  IdUsuario            String                 @id @db.Uuid
+  Nombre               String                 @db.VarChar(128)
+  Apellido_Paterno     String                 @db.VarChar(128)
+  Apellido_Materno     String                 @db.VarChar(128)
+  Username             String                 @db.VarChar(64)
+  Correo               String                 @db.VarChar(64)
+  Password             String                 @db.VarChar(64)
+  Activo               Boolean
+  ConfiguracionUsuario ConfiguracionUsuario[]
+  Perfil               Perfil[]
+  Prediccion           Prediccion[]
+  runSession           runSession[]
+}
+
+model runSession {
+  IdRunSession     String   @id @db.Uuid
+  IdUsuario        String   @db.Uuid
+  FechaSession     DateTime @db.Date
+  IdPeacerRegister BigInt
+  Distancia        Float
+  PeaceKM          Float
+  Kilometros       Boolean
+  Millas           Boolean
+  Horas            DateTime @db.Time(0)
+  Minutos          DateTime @db.Time(0)
+  Segundos         DateTime @db.Time(0)
+  Notas            String   @db.VarChar(500)
+  Usuario          Usuario  @relation(fields: [IdUsuario], references: [IdUsuario], onDelete: NoAction, onUpdate: NoAction, map: "runsession_idusuario_foreign")
+}
