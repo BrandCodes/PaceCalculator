@@ -3,9 +3,9 @@ import * as userService from '../services/user.service';
 
 export const registerUser = async (req: Request, res: Response) => {
     try {
-        const { nombre, apellidoP, apellidoM, username, password, correo, activo } = req.body;
+        const { nombre, apellidoP, apellidoM, username, correo, password, activo } = req.body;
 
-        if (!nombre || !apellidoP || !username || !password || !correo || !activo) {
+        if (!nombre || !apellidoP || !apellidoM || !username || !password || !correo || !activo) {
             return res.status(400).json({ error: 'Faltan campos obligatorios' });
         }
 
@@ -14,8 +14,8 @@ export const registerUser = async (req: Request, res: Response) => {
             apellidoP,
             apellidoM,
             username,
-            password,
             correo,
+            password,
             activo,
         });
 

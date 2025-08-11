@@ -8,23 +8,23 @@ datasource db {
 }
 
 model ConfiguracionUsuario {
-  IdConfiguracionUsuario String  @id @db.Uuid
+  IdConfiguracionUsuario String  @id @default(uuid()) @db.Uuid
   IdUsuario              String  @db.Uuid
   DarkMode               Boolean
   Usuario                Usuario @relation(fields: [IdUsuario], references: [IdUsuario], onDelete: NoAction, onUpdate: NoAction, map: "configuracionusuario_idusuario_foreign")
 }
 
 model Genero {
-  IdGenero          Int      @id
+  IdGenero          String   @id @default(uuid()) @db.Uuid
   DescripcionGenero String   @db.VarChar(128)
   Estatus           Boolean
   Perfil            Perfil[]
 }
 
 model Perfil {
-  IdPerfil              String   @id @db.Uuid
+  IdPerfil              String   @id @default(uuid()) @db.Uuid
   IdUsuario             String   @db.Uuid
-  IdGenero              Int
+  IdGenero              String   @db.Uuid
   FechaNacimiento       DateTime @db.Date
   Edad                  Int
   Deporte               String   @db.VarChar(255)
@@ -35,7 +35,7 @@ model Perfil {
 }
 
 model Prediccion {
-  IdPrediccion             String  @id @db.Uuid
+  IdPrediccion             String  @id @default(uuid()) @db.Uuid
   IdUsuario                String  @db.Uuid
   BasePace                 Float
   TiempoPrediccion5K       Float
@@ -46,7 +46,7 @@ model Prediccion {
 }
 
 model Usuario {
-  IdUsuario            String                 @id @db.Uuid
+  IdUsuario            String                 @id @default(uuid()) @db.Uuid
   Nombre               String                 @db.VarChar(128)
   Apellido_Paterno     String                 @db.VarChar(128)
   Apellido_Materno     String                 @db.VarChar(128)
@@ -61,17 +61,16 @@ model Usuario {
 }
 
 model runSession {
-  IdRunSession     String   @id @db.Uuid
-  IdUsuario        String   @db.Uuid
-  FechaSession     DateTime @db.Date
-  IdPeacerRegister BigInt
-  Distancia        Float
-  PeaceKM          Float
-  Kilometros       Boolean
-  Millas           Boolean
-  Horas            DateTime @db.Time(0)
-  Minutos          DateTime @db.Time(0)
-  Segundos         DateTime @db.Time(0)
-  Notas            String   @db.VarChar(500)
-  Usuario          Usuario  @relation(fields: [IdUsuario], references: [IdUsuario], onDelete: NoAction, onUpdate: NoAction, map: "runsession_idusuario_foreign")
+  IdRunSession String   @id @default(uuid()) @db.Uuid
+  IdUsuario    String   @db.Uuid
+  FechaSession DateTime @db.Date
+  Distancia    Float
+  PeaceKM      Float
+  Kilometros   Boolean
+  Millas       Boolean
+  Horas        DateTime @db.Time(0)
+  Minutos      DateTime @db.Time(0)
+  Segundos     DateTime @db.Time(0)
+  Notas        String   @db.VarChar(500)
+  Usuario      Usuario  @relation(fields: [IdUsuario], references: [IdUsuario], onDelete: NoAction, onUpdate: NoAction, map: "runsession_idusuario_foreign")
 }

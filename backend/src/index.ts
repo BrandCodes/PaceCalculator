@@ -27,13 +27,9 @@
 
 // src/index.ts
 import app from './app';
-import userRoutes from './routes/user.routes';
 
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
     console.log(`🚀 Server is running on http://localhost:${PORT}`);
 });
-
-app.use('/api/users', userRoutes);
-// POST http://localhost:3000/api/users/register

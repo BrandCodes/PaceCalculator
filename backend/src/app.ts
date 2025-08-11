@@ -2,6 +2,7 @@
 import express from 'express';
 import cors from 'cors';
 import healthRoutes from './routes/health.routes';
+import userRoutes from './routes/user.routes';
 
 const app = express();
 
@@ -10,5 +11,9 @@ app.use(express.json());
 
 // Rutas
 app.use('/api/health', healthRoutes);
+// ruta ejemplo.
+
+app.use('/api/users', userRoutes);
+// POST http://localhost:3000/api/users/register
 
 export default app;
