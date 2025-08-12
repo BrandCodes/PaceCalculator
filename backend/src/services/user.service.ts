@@ -4,13 +4,13 @@ import type crypto = require('crypto');
 const prisma = new PrismaClient();
 
 export const createUser = async (data: {
-    nombre: string;
-    apellidoP: string;
-    apellidoM: string;
-    username: string;
-    correo: string;
-    password: string;
-    activo: boolean;
+    Nombre: string;
+    Apellido_Paterno: string;
+    Apellido_Materno: string;
+    Username: string;
+    Correo: string;
+    Password: string;
+    Activo: boolean;
 }) => {
     return prisma.usuario.create({
         data,
