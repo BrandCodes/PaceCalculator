@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import * as Tooltip from '@radix-ui/react-tooltip';
+import toast from 'react-hot-toast';
 
 interface FormData {
     nombre: string;
@@ -30,13 +31,39 @@ export default function RegisterForm() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const res = await fetch('http://localhost:3001/api/users/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(form),
-        });
-        const data = await res.json();
-        console.log(data);
+
+        // Validación simple en frontend
+        if (!form.nombre || !form.apellidoP || !form.username || !form.password || !form.correo) {
+            toast.error("Por favor, llena todos los campos obligatorios.");
+            return;
+        }
+
+        try {
+            const res = await fetch('http://localhost:3001/api/users/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(form),
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                toast.success("Usuario registrado correctamente.");
+                setForm({
+                    nombre: '',
+                    apellidoP: '',
+                    apellidoM: '',
+                    username: '',
+                    password: '',
+                    correo: '',
+                });
+            } else {
+                toast.error(data.error || "Error al registrar usuario.");
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("No se pudo conectar con el servidor.");
+        }
     };
 
     const InputWithTooltip = ({
@@ -74,7 +101,7 @@ export default function RegisterForm() {
             <input
                 type={type || 'text'}
                 name={name}
-                value={form[name] ?? ''} // Siempre un string para evitar resets
+                value={form[name] ?? ''}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800 dark:text-white"
             />
