@@ -21,7 +21,11 @@ export default function RegisterForm() {
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        setForm(prev => ({
+            ...prev,
+            [name]: value
+        }));
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -56,7 +60,7 @@ export default function RegisterForm() {
                         </Tooltip.Trigger>
                         <Tooltip.Portal>
                             <Tooltip.Content
-                                className="bg-gray-800 text-white px-3 py-1 rounded-md shadow-lg animate-bounce"
+                                className="bg-gray-800 text-white px-3 py-1 rounded-md shadow-lg"
                                 side="right"
                                 sideOffset={5}
                             >
@@ -70,7 +74,7 @@ export default function RegisterForm() {
             <input
                 type={type || 'text'}
                 name={name}
-                value={form[name]}
+                value={form[name] ?? ''} // Siempre un string para evitar resets
                 onChange={handleChange}
                 className="w-full px-3 py-2 border rounded-lg dark:bg-gray-800 dark:text-white"
             />
