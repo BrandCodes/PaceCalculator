@@ -3,22 +3,22 @@ import * as Tooltip from '@radix-ui/react-tooltip';
 import toast from 'react-hot-toast';
 
 interface FormData {
-    nombre: string;
-    apellidoP: string;
-    apellidoM: string;
-    username: string;
-    password: string;
-    correo: string;
+    Nombre: string;
+    Apellido_Paterno: string;
+    Apellido_Materno: string;
+    Username: string;
+    Password: string;
+    Correo: string;
 }
 
 export default function RegisterForm() {
     const [form, setForm] = useState<FormData>({
-        nombre: '',
-        apellidoP: '',
-        apellidoM: '',
-        username: '',
-        password: '',
-        correo: '',
+        Nombre: '',
+        Apellido_Paterno: '',
+        Apellido_Materno: '',
+        Username: '',
+        Password: '',
+        Correo: '',
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,8 +32,11 @@ export default function RegisterForm() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        // Log en frontend antes de enviar
+        // console.log("📤 Datos enviados al backend:", form);
+
         // Validación simple en frontend
-        if (!form.nombre || !form.apellidoP || !form.username || !form.password || !form.correo) {
+        if (!form.Nombre || !form.Apellido_Paterno || !form.Apellido_Materno || !form.Username || !form.Password || !form.Correo) {
             toast.error("Por favor, llena todos los campos obligatorios.");
             return;
         }
@@ -50,12 +53,12 @@ export default function RegisterForm() {
             if (res.ok) {
                 toast.success("Usuario registrado correctamente.");
                 setForm({
-                    nombre: '',
-                    apellidoP: '',
-                    apellidoM: '',
-                    username: '',
-                    password: '',
-                    correo: '',
+                    Nombre: '',
+                    Apellido_Paterno: '',
+                    Apellido_Materno: '',
+                    Username: '',
+                    Password: '',
+                    Correo: '',
                 });
             } else {
                 toast.error(data.error || "Error al registrar usuario.");
@@ -115,12 +118,12 @@ export default function RegisterForm() {
         >
             <h2 className="text-2xl font-bold mb-4 dark:text-white">Registro de Usuario</h2>
 
-            <InputWithTooltip label="Nombre" name="nombre" tooltipText="Escribe tu nombre completo" />
-            <InputWithTooltip label="Apellido Paterno" name="apellidoP" tooltipText="Tu primer apellido" />
-            <InputWithTooltip label="Apellido Materno" name="apellidoM" tooltipText="Tu segundo apellido (opcional)" />
-            <InputWithTooltip label="Username" name="username" tooltipText="Nombre de usuario para iniciar sesión" />
-            <InputWithTooltip label="Password" name="password" type="password" tooltipText="Debe tener al menos 6 caracteres" />
-            <InputWithTooltip label="Correo" name="correo" tooltipText="Tu email personal" />
+            <InputWithTooltip label="Nombre" name="Nombre" tooltipText="Escribe tu nombre completo" />
+            <InputWithTooltip label="Apellido Paterno" name="Apellido_Paterno" tooltipText="Tu primer apellido" />
+            <InputWithTooltip label="Apellido Materno" name="Apellido_Materno" tooltipText="Tu segundo apellido (opcional)" />
+            <InputWithTooltip label="Username" name="Username" tooltipText="Nombre de usuario para iniciar sesión" />
+            <InputWithTooltip label="Password" name="Password" type="password" tooltipText="Debe tener al menos 6 caracteres" />
+            <InputWithTooltip label="Correo" name="Correo" tooltipText="Tu email personal" />
 
             <button
                 type="submit"
