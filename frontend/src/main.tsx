@@ -3,12 +3,21 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { Toaster } from "react-hot-toast";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import RegisterForm from './components/RegisterForm';
+import LoginForm from './components/LoginForm.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     {/* <App /> */}
-    <RegisterForm />
+    {/* <RegisterForm /> */}
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginForm />} />
+        <Route path="/register" element={<RegisterForm />} />
+      </Routes>
+    </BrowserRouter>
     {/* <Toaster position="top-right" reverseOrder={false} /> Estilo Normal */}
     <Toaster
       position="top-right"
