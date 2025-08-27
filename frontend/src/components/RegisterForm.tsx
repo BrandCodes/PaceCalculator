@@ -36,10 +36,10 @@ export default function RegisterForm() {
         // console.log("📤 Datos enviados al backend:", form);
 
         // Validación simple en frontend
-        if (!form.Nombre || !form.Apellido_Paterno || !form.Apellido_Materno || !form.Username || !form.Password || !form.Correo) {
-            toast.error("Por favor, llena todos los campos obligatorios.");
-            return;
-        }
+        // if (!form.Nombre || !form.Apellido_Paterno || !form.Apellido_Materno || !form.Username || !form.Password || !form.Correo) {
+        //     toast.error("Por favor, llena todos los campos obligatorios.");
+        //     return;
+        // }
 
         try {
             const res = await fetch('http://localhost:3001/api/users/register', {
