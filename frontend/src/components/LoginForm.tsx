@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import bgImage from "../assets/Wallper_PeacerApp_2.jpg"; //   ../assets/Wallper_PeacerApp_2.png
 
 export default function LoginForm() {
     const [username, setUsername] = useState("");
@@ -14,7 +15,11 @@ export default function LoginForm() {
     return (
         <div
             className="h-screen w-screen flex items-center justify-center bg-cover bg-center"
-            style={{ backgroundImage: "url('/src/assets/Wallper_PeacerApp_2.webp)" }}
+            style={{
+                backgroundImage: `url(${bgImage})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+            }}
         >
             {/* Contenedor central estilo cristal */}
             <div className="backdrop-blur-md bg-white/20 p-8 rounded-2xl shadow-xl w-96">
